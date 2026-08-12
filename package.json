@@ -1,0 +1,24 @@
+{
+  "name": "quill-crdt",
+  "version": "1.0.0",
+  "description": "Real-time collaborative plain-text editor with a from-scratch RGA CRDT, synced peer-to-peer over WebRTC (PeerJS).",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": ["crdt", "rga", "webrtc", "peerjs", "collaborative-editing"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "peerjs": "^1.5.4"
+  }
+}

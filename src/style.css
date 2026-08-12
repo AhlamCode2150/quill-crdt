@@ -1,0 +1,314 @@
+/* ---------------------------------------------------------------------
+   Quill — tokens
+   A deliberately ink-and-paper palette: deep indigo-black chrome around a
+   warm parchment writing surface. Peer presence reads as small ink blots.
+--------------------------------------------------------------------- */
+:root {
+  --ink: #12141c;
+  --ink-raised: #1b1f2c;
+  --ink-line: #2b3044;
+  --muted: #8d93ac;
+  --muted-dim: #5c6280;
+
+  --parchment: #f6efdd;
+  --parchment-shadow: #e7dcbf;
+  --ink-text: #2a2114;
+
+  --gold: #d1a446;
+  --gold-soft: rgba(209, 164, 70, 0.16);
+  --teal: #4fb3a0;
+  --coral: #e2725b;
+  --violet: #9a8cd6;
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-ui: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --radius: 10px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink);
+  color: var(--parchment);
+  font-family: var(--font-ui);
+  min-height: 100%;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(209, 164, 70, 0.07), transparent),
+    radial-gradient(ellipse 700px 500px at 100% 0%, rgba(79, 179, 160, 0.06), transparent);
+}
+
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 24px 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------------------------------- Topbar ------------------------------ */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--ink-line);
+  margin-bottom: 28px;
+}
+
+.brand { display: flex; align-items: center; gap: 14px; }
+
+.brand-mark {
+  font-size: 30px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(209, 164, 70, 0.35));
+}
+
+.brand-text h1 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: 0.01em;
+  margin: 0;
+  color: var(--parchment);
+}
+
+.tagline {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.peers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border: 1px solid var(--ink-line);
+  border-radius: 999px;
+  background: var(--ink-raised);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.peers-dots { display: inline-flex; gap: 4px; }
+
+.peer-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blot-in 0.25s ease-out;
+}
+
+.peer-dot.pulse { animation: blot-pulse 0.6s ease-out; }
+
+@keyframes blot-in {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes blot-pulse {
+  0% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  100% { box-shadow: 0 0 0 6px transparent; opacity: 1; }
+}
+
+.btn {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--gold);
+  color: #24190a;
+  border-color: var(--gold);
+}
+
+.btn-primary:hover { background: #ddb35c; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--parchment);
+  border-color: var(--ink-line);
+}
+
+.btn-ghost:hover { border-color: var(--muted-dim); background: var(--ink-raised); }
+
+.btn-ghost.is-offline {
+  color: var(--coral);
+  border-color: rgba(226, 114, 91, 0.5);
+  background: rgba(226, 114, 91, 0.08);
+}
+
+/* ------------------------------- Editor ------------------------------- */
+
+.editor-shell {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 22px;
+  flex: 1;
+}
+
+.paper {
+  background: var(--parchment);
+  color: var(--ink-text);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.55), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.paper-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--parchment-shadow);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #7a6c4d;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--coral);
+  transition: background 0.2s ease;
+}
+
+.status-dot.online { background: var(--teal); }
+.status-dot.offline { background: var(--coral); }
+
+.room-code { margin-left: auto; }
+.room-code code {
+  background: var(--parchment-shadow);
+  padding: 2px 7px;
+  border-radius: 5px;
+  color: #4a3f24;
+}
+
+.editor {
+  flex: 1;
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  color: var(--ink-text);
+  font-family: var(--font-mono);
+  font-size: 15.5px;
+  line-height: 1.7;
+  padding: 22px 26px 28px;
+}
+
+.editor::placeholder { color: #a99a75; }
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+
+.card h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0 0 10px;
+  color: var(--gold);
+}
+
+.card p, .card li {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #c9cde0;
+  margin: 0;
+}
+
+.card ol {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card strong { color: var(--parchment); font-weight: 600; }
+.card em { color: var(--teal); font-style: normal; }
+
+/* ------------------------------- Footer ------------------------------- */
+
+.footer {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ink-line);
+  font-size: 12.5px;
+  color: var(--muted-dim);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.footer a { color: var(--muted); text-decoration: none; border-bottom: 1px dotted var(--muted-dim); }
+.footer a:hover { color: var(--gold); border-color: var(--gold); }
+.dot-sep { opacity: 0.6; }
+
+/* ------------------------------- Responsive ---------------------------- */
+
+@media (max-width: 860px) {
+  .editor-shell { grid-template-columns: 1fr; }
+  .sidebar { order: 2; }
+}
+
+@media (max-width: 560px) {
+  .topbar-right { width: 100%; justify-content: space-between; }
+  .brand-text h1 { font-size: 23px; }
+}
+
+/* ------------------------------- Motion & focus ------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .peer-dot, .btn { animation: none !important; transition: none !important; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}

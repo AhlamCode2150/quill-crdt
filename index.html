@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quill — peer-to-peer collaborative text</title>
+    <meta name="description" content="A real-time collaborative plain-text editor built on a from-scratch RGA CRDT, synced peer-to-peer over WebRTC. No server ever sees your document." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%AA%B6%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">&#42910;</span>
+          <div class="brand-text">
+            <h1>Quill</h1>
+            <p class="tagline">peer-to-peer collaborative text &middot; no server in between</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="peers" id="peers" title="Connected peers in this room">
+            <span class="peers-dots" id="peersDots"></span>
+            <span class="peers-label" id="peersLabel">0 peers connected</span>
+          </div>
+          <button class="btn btn-ghost" id="offlineToggle" type="button">Go offline</button>
+          <button class="btn btn-primary" id="copyLink" type="button">Copy room link</button>
+        </div>
+      </header>
+
+      <main class="editor-shell">
+        <div class="paper">
+          <div class="paper-meta">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">connecting&hellip;</span>
+            <span class="room-code">room <code id="roomCode"></code></span>
+          </div>
+          <textarea
+            id="editor"
+            class="editor"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off"
+            placeholder="Start writing. Open this same room link in another tab to see it sync live, peer-to-peer, no server involved."
+          ></textarea>
+        </div>
+
+        <aside class="sidebar">
+          <section class="card">
+            <h2>How this works</h2>
+            <p>
+              Every keystroke becomes a tiny operation in a <strong>Replicated Growable Array (RGA)</strong> &mdash;
+              a conflict-free sequence CRDT implemented from scratch in this project. Operations are broadcast directly
+              to connected peers over a <strong>WebRTC data channel</strong>. There is no application server: PeerJS's
+              public broker is used only for the initial handshake that lets two browsers find each other.
+            </p>
+          </section>
+          <section class="card">
+            <h2>Try it</h2>
+            <ol>
+              <li>Copy the room link above.</li>
+              <li>Open it in a second tab or another device.</li>
+              <li>Type in either tab &mdash; it merges live in both.</li>
+              <li>Click <em>Go offline</em>, keep editing in both tabs, then reconnect &mdash; watch it merge cleanly.</li>
+            </ol>
+          </section>
+        </aside>
+      </main>
+
+      <footer class="footer">
+        <a href="https://github.com/AhlamCode2150/quill-crdt" target="_blank" rel="noopener">Source on GitHub</a>
+        <span class="dot-sep">&middot;</span>
+        <span>CRDT correctness verified by a randomized convergence test suite &mdash; see README</span>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/ui/main.ts"></script>
+  </body>
+</html>
