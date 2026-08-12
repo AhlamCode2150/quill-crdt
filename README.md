@@ -4,8 +4,8 @@
 
 Open the same room link in two tabs. Type in either one. Both converge to the same text, even if you go offline, keep editing, and reconnect later. There is no application server in this picture: your document never passes through anything you (or I) control.
 
-Live demo: **[quill-collab.netlify.app](https://quill-collab.netlify.app)** _(actual URL filled in below after deploy)_
-Source: this repo.
+Live demo: **[quill-crdt.netlify.app](https://quill-crdt.netlify.app)**
+Source: this repo — [github.com/AhlamCode2150/quill-crdt](https://github.com/AhlamCode2150/quill-crdt)
 
 ---
 
